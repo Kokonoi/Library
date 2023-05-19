@@ -4,10 +4,9 @@ function Book(title, author, numberOfPages, isRead) {
   this.numberOfPages = numberOfPages;
   this.isRead = isRead;
   this.info = function () {
-    console.log(title + ",", author + ",", numberOfPages + ",", isRead);
-    return;
+    return `${title} , ${author}, ${numberOfPages}, ${isRead}`;
   };
 }
 
 const bookOne = new Book("Bab", "Someone", 24, true);
-bookOne.info();
+console.log(bookOne.info());
