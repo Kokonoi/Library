@@ -7,9 +7,38 @@ let myLibrary = [bookOne];
 
 const bookHolder = document.getElementById("books");
 const addBookBtn = document.getElementById("add");
+createBP(bookOne);
 
 // bookHolder.innerHTML = "";
 addBookBtn.addEventListener("click", addBookToLibrary);
+
+function createBP(book) {
+  //element that wraps
+  let div = document.createElement("div");
+  //child elements
+  let bookName = document.createElement("p");
+  bookName.innerText = book.title;
+  let bookAuthor = document.createElement("p");
+  bookAuthor.innerText = book.author;
+  let numberOfPages = document.createElement("p");
+  numberOfPages.innerText = book.pages;
+  let isBookRead = book.isRead;
+  let BookRead = document.createElement("p");
+  if (isBookRead == true) {
+    BookRead.innerText = "Read";
+  } else {
+    BookRead.innerText = "Not read";
+  }
+  let rmBtn = document.createElement("button");
+  rmBtn.innerText = "delete";
+
+  bookHolder.appendChild(div);
+  div.appendChild(bookName);
+  div.appendChild(bookAuthor);
+  div.appendChild(numberOfPages);
+  div.appendChild(BookRead);
+  div.appendChild(rmBtn);
+}
 
 function Book(title, author, pages, isRead) {
   this.title = title;
