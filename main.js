@@ -1,17 +1,20 @@
 // const bookOne = new Book("Bab", "Someone", 24, true);
 // console.log(bookOne.info());
+const bookOne = new Book("Bab", "Someone", 24, true);
 
 let booksAdded = 0;
-let myLibrary = [];
+let myLibrary = [bookOne];
 
+const bookHolder = document.getElementById("books");
 const addBookBtn = document.getElementById("add");
 
+// bookHolder.innerHTML = "";
 addBookBtn.addEventListener("click", addBookToLibrary);
 
 function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
-  this.pages = pages;
+  this.pages = +pages;
   this.isRead = isRead;
   this.info = function () {
     return `${title} , ${author}, ${pages}, ${isRead}`;
