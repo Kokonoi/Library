@@ -1,4 +1,4 @@
 .DS_Store
-.eslintrc.js
+# .eslintrc.js
 # Ignore Node.js generated files
 node_modules/
