@@ -10,8 +10,10 @@ let myLibrary = [bookOne, bookTwo, bookThree];
 const bookHolder = document.getElementById("books");
 const addBookBtn = document.getElementById("add");
 const formContainer = document.querySelector(".form");
+const submitBookBtn = document.getElementById("submitBook");
 
 addBookBtn.addEventListener("click", displayForm);
+submitBookBtn.addEventListener("click", addBookToLibrary);
 
 myLibrary.forEach((book) => book.createBP());
 
@@ -57,11 +59,12 @@ function displayForm() {
   formContainer.style.display = "block";
 }
 
-function addBookToLibrary() {
-  let title = document.getElementById("title");
-  let author = document.getElementById("author");
-  let pages = document.getElementById("pages");
-  let isRead = document.getElementById("isRead");
+function addBookToLibrary(event) {
+  event.preventDefault();
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let isRead = document.getElementById("isRead").value;
   booksAdded++;
   myLibrary.push(
     (window["book" + booksAdded] = new Book(title, author, pages, isRead))
