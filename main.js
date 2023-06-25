@@ -1,4 +1,7 @@
-
+//dummy books
+// const bookOne = new Book("Bab", "Someone", 24, true);
+// const bookTwo = new Book("Sab", "Bomeone", 21, true);
+// const bookThree = new Book("Man", "Domeone", 22, false);
 // bookOne, bookTwo, bookThree
 
 let booksAdded = 0;
@@ -27,10 +30,9 @@ function Book(title, author, pages, isRead) {
   };
 
   //function that creates a container with the particular elements that are needed to store a form
-  this.createBP(id) = function () {
+  this.createBP = function () {
     //element that wraps
     let div = document.createElement("div");
-    div.classList.add(id)
     //child elements
     let bookName = document.createElement("p");
     bookName.innerText = title;
