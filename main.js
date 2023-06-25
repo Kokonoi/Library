@@ -39,17 +39,27 @@ function Book(title, author, pages, isRead, identifier) {
     bookAuthor.innerText = author;
     let numberOfPages = document.createElement("p");
     numberOfPages.innerText = pages;
-    let isBookRead = isRead;
-    let BookRead = document.createElement("p");
-    if (isBookRead == true) {
+    //read button
+    let BookRead = document.createElement("button");
+    if (isRead == true) {
       BookRead.innerText = "Read";
     } else {
       BookRead.innerText = "Not read";
     }
+    //
+    BookRead.addEventListener("click", () => {
+      this.isRead = !this.isRead;
+      if (this.isRead) {
+        BookRead.innerText = "Read";
+      } else {
+        BookRead.innerText = "Not read";
+      }
+    });
+    //remove button
     let rmBtn = document.createElement("button");
     rmBtn.innerText = "delete";
     rmBtn.addEventListener("click", () => removeBook(identifier));
-
+    //making html elements
     bookHolder.appendChild(div);
     div.appendChild(bookName);
     div.appendChild(bookAuthor);
@@ -62,9 +72,11 @@ function Book(title, author, pages, isRead, identifier) {
 function displayForm() {
   formContainer.style.display = "block";
 }
+
 function hideForm() {
   formContainer.style.display = "none";
 }
+
 function removeBook(identifier) {
   let div = document.querySelector("." + identifier);
   if (div) {
@@ -74,7 +86,6 @@ function removeBook(identifier) {
       myLibrary.splice(index, 1);
     }
   }
-  booksAdded--;
 }
 
 function addBookToLibrary() {
@@ -93,6 +104,7 @@ function addBookToLibrary() {
       identifier
     ))
   );
+  // array -> book with a corresponding identifier
   myLibrary.find((book) => book.identifier === identifier).createBP(identifier);
   title.value = "";
   author.value = "";
