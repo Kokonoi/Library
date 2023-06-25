@@ -1,11 +1,11 @@
+//dummy books
 // const bookOne = new Book("Bab", "Someone", 24, true);
-// console.log(bookOne.info());
-const bookOne = new Book("Bab", "Someone", 24, true);
-const bookTwo = new Book("Sab", "Bomeone", 21, true);
-const bookThree = new Book("Man", "Domeone", 22, false);
+// const bookTwo = new Book("Sab", "Bomeone", 21, true);
+// const bookThree = new Book("Man", "Domeone", 22, false);
+// bookOne, bookTwo, bookThree
 
 let booksAdded = 0;
-let myLibrary = [bookOne, bookTwo, bookThree];
+let myLibrary = [];
 
 const bookHolder = document.getElementById("books");
 const addBookBtn = document.getElementById("add");
@@ -26,6 +26,7 @@ function Book(title, author, pages, isRead) {
     return `${title} , ${author}, ${pages}, ${isRead}`;
   };
 
+  //function that creates a container with the particular elements that are needed to store a form
   this.createBP = function () {
     //element that wraps
     let div = document.createElement("div");
@@ -58,15 +59,29 @@ function Book(title, author, pages, isRead) {
 function displayForm() {
   formContainer.style.display = "block";
 }
+function hideForm() {
+  formContainer.style.display = "none";
+}
 
 function addBookToLibrary(event) {
   event.preventDefault();
-  let title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
-  let isRead = document.getElementById("isRead").value;
+  let title = document.getElementById("title");
+  let author = document.getElementById("author");
+  let pages = document.getElementById("pages");
+  let isRead = document.getElementById("isRead");
   booksAdded++;
   myLibrary.push(
-    (window["book" + booksAdded] = new Book(title, author, pages, isRead))
+    (window["book" + booksAdded] = new Book(
+      title.value,
+      author.value,
+      pages.value,
+      isRead.checked
+    ))
   );
+  myLibrary[booksAdded - 1].createBP();
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  isRead.checked = false;
+  hideForm();
 }
