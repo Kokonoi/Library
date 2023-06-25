@@ -20,19 +20,18 @@ submitBookBtn.addEventListener("submit", (event) => {
 
 myLibrary.forEach((book) => book.createBP());
 
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages, isRead, identifier) {
   this.title = title;
   this.author = author;
   this.pages = +pages;
   this.isRead = isRead;
-  this.info = function () {
-    return `${title} , ${author}, ${pages}, ${isRead}`;
-  };
+  this.identifier = identifier;
 
   //function that creates a container with the particular elements that are needed to store a form
-  this.createBP = function () {
+  this.createBP = function (id) {
     //element that wraps
     let div = document.createElement("div");
+    div.classList.add(id);
     //child elements
     let bookName = document.createElement("p");
     bookName.innerText = title;
@@ -49,6 +48,7 @@ function Book(title, author, pages, isRead) {
     }
     let rmBtn = document.createElement("button");
     rmBtn.innerText = "delete";
+    rmBtn.addEventListener("click", () => removeBook(identifier));
 
     bookHolder.appendChild(div);
     div.appendChild(bookName);
@@ -65,9 +65,16 @@ function displayForm() {
 function hideForm() {
   formContainer.style.display = "none";
 }
-function removeBook() {
+function removeBook(identifier) {
+  let div = document.querySelector("." + identifier);
+  if (div) {
+    div.remove();
+    let index = myLibrary.findIndex((book) => book.identifier === identifier);
+    if (index !== -1) {
+      myLibrary.splice(index, 1);
+    }
+  }
   booksAdded--;
-  myLibrary.pop();
 }
 
 function addBookToLibrary() {
@@ -75,16 +82,18 @@ function addBookToLibrary() {
   let author = document.getElementById("author");
   let pages = document.getElementById("pages");
   let isRead = document.getElementById("isRead");
+  let identifier = "BookNum" + booksAdded;
   booksAdded++;
   myLibrary.push(
     (window["book" + booksAdded] = new Book(
       title.value,
       author.value,
       pages.value,
-      isRead.checked
+      isRead.checked,
+      identifier
     ))
   );
-  myLibrary[booksAdded - 1].createBP();
+  myLibrary.find((book) => book.identifier === identifier).createBP(identifier);
   title.value = "";
   author.value = "";
   pages.value = "";
