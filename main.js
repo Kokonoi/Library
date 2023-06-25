@@ -13,7 +13,10 @@ const formContainer = document.querySelector(".form");
 const submitBookBtn = document.getElementById("submitBook");
 
 addBookBtn.addEventListener("click", displayForm);
-submitBookBtn.addEventListener("click", addBookToLibrary);
+submitBookBtn.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addBookToLibrary();
+});
 
 myLibrary.forEach((book) => book.createBP());
 
@@ -63,8 +66,7 @@ function hideForm() {
   formContainer.style.display = "none";
 }
 
-function addBookToLibrary(event) {
-  event.preventDefault();
+function addBookToLibrary() {
   let title = document.getElementById("title");
   let author = document.getElementById("author");
   let pages = document.getElementById("pages");
