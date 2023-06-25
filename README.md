@@ -5,7 +5,7 @@ This Git repository contains a book library project implemented using JavaScript
 The book library project offers the following features:
 
 <ol>
-    <li>Add Book: Users can add new books to the library by providing information such as the book title, author, and ISBN.</li>
+    <li>Add Book: Users can add new books to the library by providing information such as the book title, author, and number of pages</li>
     <li>Remove Book: Users can remove books from the library by selecting the desired book from the list.</li>
     <li>Mark as Read/Unread: Users can mark books as read or unread, helping them keep track of their reading progress.</li>
 </ol>
